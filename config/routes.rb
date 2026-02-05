@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :beds, only: [:index] do
+    collection do
+      get :export
+    end
     member do
       post :assign
       post :discharge
