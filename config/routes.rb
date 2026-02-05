@@ -7,4 +7,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  resources :beds, only: [:index] do
+    member do
+      post :assign
+      post :discharge
+      post :clean
+    end
+  end
+  
 end
