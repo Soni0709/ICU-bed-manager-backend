@@ -20,4 +20,50 @@ class Bed < ApplicationRecord
   def maintenance?
     state == 'maintenance'
   end
+
+  # Actions with locking
+  def assign_patient!(name, urgency)
+    transaction do
+      lock!                    # Pessimistic lock: SELECT FOR UPDATE
+      
+      raise "Bed not available" unless available?
+      
+      update!(
+        state: 'occupied',
+        patient_name: name,
+        urgency_level: urgency,
+        assigned_at: Time.current
+      )
+    end
+  end
+  
+  def discharge_patient!
+    transaction do
+      lock!
+      
+      raise "No patient to discharge" unless occupied?
+      
+      update!(
+        state: 'maintenance',
+        discharged_at: Time.current
+      )
+    end
+  end
+  
+  def mark_cleaned!
+    transaction do
+      lock!
+      
+      raise "Bed not in maintenance" unless maintenance?
+      
+      update!(
+        state: 'available',
+        patient_name: nil,
+        urgency_level: nil,
+        assigned_at: nil,
+        discharged_at: nil
+      )
+    end
+  end
+
 end
