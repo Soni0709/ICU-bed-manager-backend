@@ -30,6 +30,20 @@ class BedsController < ApplicationController
   rescue => e
     render json: { error: e.message }, status: :unprocessable_entity
   end
+
+  # GET /beds/export
+  def export
+    headers['Content-Type'] = 'text/csv'
+    headers['Content-Disposition'] = 'attachment; filename="beds.csv"'
+    
+    # Streaming response
+    self.response_body = Enumerator.new do |stream|
+      stream << "Bed,State,Patient,Urgency,Assigned At\n"
+      Bed.find_each do |bed|
+        stream << "#{bed.bed_number},#{bed.state},#{bed.patient_name || '-'},#{bed.urgency_level || '-'},#{bed.assigned_at || '-'}\n"
+      end
+    end
+  end
   
   
   private
