@@ -7,3 +7,14 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+Bed.destroy_all
+
+20.times do |i|
+  Bed.create!(
+    bed_number: "ICU-#{(i + 1).to_s.rjust(2, '0')}",
+    state: 'available'
+  )
+end
+
+puts "Created #{Bed.count} beds"
