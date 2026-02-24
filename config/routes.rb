@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :beds, only: [:index] do
+  resources :beds, only: [ :index ] do
     collection do
       get :export
     end
@@ -18,5 +18,4 @@ Rails.application.routes.draw do
       post :clean
     end
   end
-  
 end

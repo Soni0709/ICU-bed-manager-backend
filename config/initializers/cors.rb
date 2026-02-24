@@ -15,14 +15,13 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     # Add your frontend domain after deployment
-    origins 'http://localhost:5173', 
-            'http://localhost:3000',
+    origins "http://localhost:5173",
+            "http://localhost:3000",
             /https:\/\/.*\.vercel\.app$/  # Allow all Vercel domains
 
-    resource '*',
+    resource "*",
       headers: :any,
-      methods: [:get, :post, :put, :patch, :delete, :options, :head],
-      expose: ['Content-Disposition']
+      methods: [ :get, :post, :put, :patch, :delete, :options, :head ],
+      expose: [ "Content-Disposition" ]
   end
 end
-
