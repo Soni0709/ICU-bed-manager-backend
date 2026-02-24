@@ -1,0 +1,18 @@
+databases:
+  - name: icu_bed_manager_db
+    databaseName: icu_bed_manager_production
+    user: icu_bed_manager
+
+services:
+  - type: web
+    name: icu-bed-manager-api
+    runtime: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: icu_bed_manager_db
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
