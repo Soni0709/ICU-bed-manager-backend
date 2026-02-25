@@ -17,7 +17,8 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     # Add your frontend domain after deployment
     origins "http://localhost:5173",
             "http://localhost:3000",
-            /https:\/\/.*\.vercel\.app$/  # Allow all Vercel domains
+            "https://rad-lollipop-ccda4a.netlify.app/",
+            /https:\/\/.*\.netlify\.app$/  # Allow all Vercel domains
 
     resource "*",
       headers: :any,
