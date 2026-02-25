@@ -72,9 +72,9 @@ test:
 # the values provided in this file. Alternatively, you can specify a connection
 # URL environment variable explicitly:
 #
-  production:
-    <<: *default
-    url: <%= ENV["postgresql://icu_bed_manager:8kLKNNgZ6OhqeiU7lvY34srawEChcusR@dpg-d6f9qlhr0fns73f6bb80-a/icu_bed_manager_production"] %>
+production:
+  <<: *default
+  url: <%= ENV["postgresql://icu_bed_manager:8kLKNNgZ6OhqeiU7lvY34srawEChcusR@dpg-d6f9qlhr0fns73f6bb80-a/icu_bed_manager_production"] %>
 
 # Connection URLs for non-primary databases can also be configured using
 # environment variables. The variable name is formed by concatenating the
@@ -85,21 +85,4 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
-production:
-  primary: &primary_production
-    <<: *default
-    database: icu_backend_production
-    username: icu_backend
-    password: <%= ENV["ICU_BACKEND_DATABASE_PASSWORD"] %>
-  cache:
-    <<: *primary_production
-    database: icu_backend_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: icu_backend_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: icu_backend_production_cable
-    migrations_paths: db/cable_migrate
+
