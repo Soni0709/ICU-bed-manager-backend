@@ -49,7 +49,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
   # CORS for frontend communication
   gem "rack-cors"
-  gem "rack", '~> 2.2.22'
+  gem "rack", "~> 2.2.22"
 
   # For state machine
   gem "aasm"
